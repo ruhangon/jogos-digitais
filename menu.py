@@ -10,7 +10,7 @@ class Menu:
     def faz_acao(self, pygame, event):
         from accessible_output2.outputs.auto import Auto
         o = Auto()
-        if (event == pygame.K_UP):
+        if (event == pygame.K_w):
             if ((self.ponteiro-1) < 0):
                 o.speak(self.lista_opcoes[self.ponteiro], interrupt=True)
                 return
@@ -19,7 +19,7 @@ class Menu:
                 o.speak(self.lista_opcoes[self.ponteiro], interrupt=True)
                 return
 
-        elif (event == pygame.K_DOWN):
+        elif (event == pygame.K_s):
             if ((self.ponteiro+1) >= len(self.lista_opcoes)):
                 o.speak(self.lista_opcoes[self.ponteiro], interrupt=True)
                 return

@@ -1,4 +1,5 @@
 from menu import Menu
+from personagem import Personagem
 from pygame.locals import *
 import os
 import pygame
@@ -19,6 +20,8 @@ menu_principal.adiciona_item('sair do jogo')
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
+edd = Personagem()
+
 menu_principal_ativo = True
 while (menu_principal_ativo):
     for event in pygame.event.get():
@@ -36,11 +39,14 @@ while (menu_principal_ativo):
                 pygame.quit()
                 sys.exit()
 
+    if (menu_principal_ativo == False):
+        fase = 1
     while (menu_principal_ativo == False):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
-            else:
+            if (event.type == KEYDOWN):
+                edd.navega_no_mapa(pygame, event.key)
 
