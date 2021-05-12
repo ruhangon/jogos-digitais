@@ -1,3 +1,4 @@
+from fases import PrimeiraFase
 from menu import Menu
 from personagem import Personagem
 from pygame.locals import *
@@ -20,6 +21,7 @@ menu_principal.adiciona_item('sair do jogo')
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
+fase = 1
 edd = Personagem()
 
 menu_principal_ativo = True
@@ -40,7 +42,8 @@ while (menu_principal_ativo):
                 sys.exit()
 
     if (menu_principal_ativo == False):
-        fase = 1
+        if (fase == 1):
+            fase_atual = PrimeiraFase()
     while (menu_principal_ativo == False):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,5 +51,5 @@ while (menu_principal_ativo):
                 sys.exit()
 
             if (event.type == KEYDOWN):
-                edd.navega_no_mapa(pygame, event.key)
+                edd.navega_no_mapa(pygame, event.key, fase_atual.mapa_da_fase)
 
