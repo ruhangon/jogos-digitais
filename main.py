@@ -51,5 +51,10 @@ while (menu_principal_ativo):
                 sys.exit()
 
             if (event.type == KEYDOWN):
-                edd.navega_no_mapa(pygame, event.key, fase_atual.mapa_da_fase)
+                if ((event.key == pygame.K_w) or (event.key == pygame.K_a) or (event.key == pygame.K_s) or (event.key == pygame.K_d)):
+                    edd.navega_no_mapa(pygame, event.key, fase_atual.mapa_da_fase)
+                elif (event.key == pygame.K_1):
+                    edd.mostra_informacoes_do_personagem()
+                elif (event.key == pygame.K_2):
+                    edd.mostra_coordenadas_do_personagem()
 

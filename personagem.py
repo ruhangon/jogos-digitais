@@ -61,3 +61,19 @@ class Personagem:
                 self.largura += 1
                 return
 
+    def mostra_informacoes_do_personagem(self):
+        from accessible_output2.outputs.auto import Auto
+        o = Auto()
+        nome = 'Nome: ' + self.nome
+        hp = 'Vida: ' + str(self.hp)
+        frase = nome +'. '+ hp
+        o.speak(frase, interrupt=True)
+
+    def mostra_coordenadas_do_personagem(self):
+        from accessible_output2.outputs.auto import Auto
+        o = Auto()
+        x = 'X: ' + str(self.largura)
+        y = 'Y: ' + str(self.altura)
+        coord = x +'. '+ y
+        o.speak(coord, interrupt=True)
+
