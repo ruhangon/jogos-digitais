@@ -10,23 +10,23 @@ class Menu:
     def faz_acao(self, pygame, event):
         from accessible_output2.outputs.auto import Auto
         o = Auto()
-        if (event == pygame.K_w):
+        if (event == pygame.K_UP):
             if ((self.ponteiro-1) < 0):
                 o.speak(self.lista_opcoes[self.ponteiro], interrupt=True)
-                return
+                return ''
             else:
                 self.ponteiro -= 1
                 o.speak(self.lista_opcoes[self.ponteiro], interrupt=True)
-                return
+                return ''
 
-        elif (event == pygame.K_s):
+        elif (event == pygame.K_DOWN):
             if ((self.ponteiro+1) >= len(self.lista_opcoes)):
                 o.speak(self.lista_opcoes[self.ponteiro], interrupt=True)
-                return
+                return ''
             else:
                 self.ponteiro += 1
                 o.speak(self.lista_opcoes[self.ponteiro], interrupt=True)
-                return
+                return ''
 
         elif (event == pygame.K_RETURN):
             som_enter = 'sons/efeitos/enter.wav'
