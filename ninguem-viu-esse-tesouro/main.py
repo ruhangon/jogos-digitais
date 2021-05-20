@@ -44,6 +44,7 @@ while (menu_principal_ativo):
     if (menu_principal_ativo == False):
         if (fase == 1):
             fase_atual = PrimeiraFase()
+            fase_atual.dialogos.mostra_dialogos_iniciais(pygame)
     while (menu_principal_ativo == False):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
