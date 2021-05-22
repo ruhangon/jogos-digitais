@@ -68,3 +68,8 @@ class Personagem:
             return True
         return False
 
+    def revive(self):
+        self.hp = 10
+        self.largura = 3
+        self.altura = 1
+
