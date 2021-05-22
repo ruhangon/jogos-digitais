@@ -3,6 +3,7 @@ class PrimeiraFase:
         from dialogo import Dialogo
         from mapa import Mapa
         self.mapa_da_fase = Mapa(5, 6)
+        self.mapa_da_fase.prepara_robombas([[3, 3], [2, 5], [4, 5]])
         self.dialogos = Dialogo()
         self.prepara_dialogos_iniciais()
         self.prepara_dialogos_finais()

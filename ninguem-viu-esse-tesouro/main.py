@@ -44,7 +44,8 @@ while (menu_principal_ativo):
     if (menu_principal_ativo == False):
         if (fase == 1):
             fase_atual = PrimeiraFase()
-            fase_atual.dialogos.mostra_dialogos_iniciais(pygame)
+            # fase_atual.dialogos.mostra_dialogos_iniciais(pygame)
+            sobrevive = True
     while (menu_principal_ativo == False):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -54,8 +55,16 @@ while (menu_principal_ativo):
             if (event.type == KEYDOWN):
                 if ((event.key == pygame.K_w) or (event.key == pygame.K_a) or (event.key == pygame.K_s) or (event.key == pygame.K_d)):
                     edd.navega_no_mapa(pygame, event.key, fase_atual.mapa_da_fase)
+                    fase_atual.mapa_da_fase.verifica_armadilha_robomba(pygame, edd)
+                    sobrevive = edd.sobrevive()
                 elif (event.key == pygame.K_1):
                     edd.mostra_informacoes_do_personagem()
                 elif (event.key == pygame.K_2):
                     edd.mostra_coordenadas_do_personagem()
+
+        if (sobrevive == False):
+            dir_trilha_menu = 'sons/trilhas/menu_perdeu_jogo.mp3'
+            menu_derrota = Menu(pygame, dir_trilha_menu)
+            menu_derrota.adiciona_item('Reiniciar fase')
+            menu_derrota.adiciona_item('sair do jogo')
 

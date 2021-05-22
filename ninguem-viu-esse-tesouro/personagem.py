@@ -2,11 +2,8 @@ class Personagem:
     def __init__(self):
         self.nome = 'Edd'
         self.hp = 10
-        self.altura = 1
         self.largura = 3
-        self.anel_de_lista = None
-        self.chave_eletronica_de_pilha = None
-        self.arma_de_portais_com_fila = None
+        self.altura = 1
 
     def navega_no_mapa(self, pygame, event, mapa):
         if (event == pygame.K_w):
@@ -65,4 +62,9 @@ class Personagem:
         y = 'Y: ' + str(self.altura)
         coord = x +'. '+ y
         o.speak(coord, interrupt=True)
+
+    def sobrevive(self):
+        if (personagem.hp > 0):
+            return True
+        return False
 
