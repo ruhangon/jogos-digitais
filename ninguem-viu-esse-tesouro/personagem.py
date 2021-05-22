@@ -73,3 +73,37 @@ class Personagem:
         self.largura = 3
         self.altura = 1
 
+    def radar_robombas(self, pygame, pos_robombas):
+        if ([(self.largura+1), self.altura] in pos_robombas):
+            som_radar_robomba = 'sons/efeitos/radar_robomba.wav'
+            som = pygame.mixer.Sound(som_radar_robomba)
+            som.play()
+        elif ([(self.largura-1), self.altura] in pos_robombas):
+            som_radar_robomba = 'sons/efeitos/radar_robomba.wav'
+            som = pygame.mixer.Sound(som_radar_robomba)
+            som.play()
+        elif ([self.largura, (self.altura-1)] in pos_robombas):
+            som_radar_robomba = 'sons/efeitos/radar_robomba.wav'
+            som = pygame.mixer.Sound(som_radar_robomba)
+            som.play()
+        elif ([self.largura, (self.altura+1)] in pos_robombas):
+            som_radar_robomba = 'sons/efeitos/radar_robomba.wav'
+            som = pygame.mixer.Sound(som_radar_robomba)
+            som.play()
+
+    def rastreia_robombas(self, pygame, pos_robombas):
+        from accessible_output2.outputs.auto import Auto
+        o = Auto()
+        robombas_localizados = ''
+        if ([(self.largura-1), self.altura] in pos_robombas):
+            robombas_localizados += 'Há um robomba na sua esquerda. '
+        if ([(self.largura+1), self.altura] in pos_robombas):
+            robombas_localizados += 'Há um robomba na sua direita. '
+        if ([self.largura, (self.altura+1)] in pos_robombas):
+            robombas_localizados += 'Há um robomba acima. '
+        if ([self.largura, (self.altura-1)] in pos_robombas):
+            robombas_localizados += 'Há um robomba abaixo.'
+        if (robombas_localizados != ''):
+            frase = 'Radar do Edd: ' + robombas_localizados
+            o.speak(frase, interrupt=True)
+

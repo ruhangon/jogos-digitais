@@ -49,6 +49,7 @@ while (menu_principal_ativo == True):
                 if ((event.key == pygame.K_w) or (event.key == pygame.K_a) or (event.key == pygame.K_s) or (event.key == pygame.K_d)):
                     edd.navega_no_mapa(pygame, event.key, fase_atual.mapa_da_fase)
                     fase_atual.mapa_da_fase.verifica_armadilha_robomba(pygame, edd)
+                    edd.radar_robombas(pygame, fase_atual.mapa_da_fase.robombas)
                     if (edd.sobrevive() == False):
                         dir_trilha_menu = 'sons/trilhas/menu_derrota.mp3'
                         menu_derrota = Menu(pygame, dir_trilha_menu)
@@ -70,4 +71,6 @@ while (menu_principal_ativo == True):
                     edd.mostra_informacoes_do_personagem()
                 elif (event.key == pygame.K_2):
                     edd.mostra_coordenadas_do_personagem()
+                elif (event.key == pygame.K_r):
+                    edd.rastreia_robombas(pygame, fase_atual.mapa_da_fase.robombas)
 
