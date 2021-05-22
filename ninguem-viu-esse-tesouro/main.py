@@ -25,21 +25,14 @@ fase = 1
 edd = Personagem()
 
 menu_principal_ativo = True
-while (menu_principal_ativo):
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-
-        if (event.type == KEYDOWN):
-            acao = menu_principal.faz_acao(pygame, event.key)
-            if (acao == 'novo jogo'):
-                pygame.mixer.music.stop()
-                menu_principal_ativo = False
-                break
-            elif (acao == 'sair do jogo'):
-                pygame.quit()
-                sys.exit()
+while (menu_principal_ativo == True):
+    acao_menu = menu_principal.faz_acao(pygame)
+    if (acao_menu == 'novo jogo'):
+        pygame.mixer.music.stop()
+        menu_principal_ativo = False
+    elif (acao_menu == 'sair do jogo'):
+        pygame.quit()
+        sys.exit()
 
     if (menu_principal_ativo == False):
         if (fase == 1):

@@ -64,7 +64,7 @@ class Personagem:
         o.speak(coord, interrupt=True)
 
     def sobrevive(self):
-        if (personagem.hp > 0):
+        if (self.hp > 0):
             return True
         return False
 
