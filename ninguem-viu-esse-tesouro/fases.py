@@ -4,6 +4,7 @@ class PrimeiraFase:
         from mapa import Mapa
         self.mapa_da_fase = Mapa(5, 6)
         self.mapa_da_fase.prepara_robombas([[3, 3], [2, 5], [4, 5]])
+        self.mapa_da_fase.prepara_capsulas([[3, 2], [3, 4], [5, 1]])
         self.dialogos = Dialogo()
         self.prepara_dialogos_iniciais()
         self.prepara_dialogos_finais()

@@ -1,9 +1,12 @@
 class Personagem:
     def __init__(self):
+        from item.guarda_capsulas import GuardaCapsulas
         self.nome = 'Edd'
         self.hp = 10
         self.largura = 3
         self.altura = 1
+        guarda_capsulas = GuardaCapsulas()
+        self.equipamento_atual = 0
 
     def navega_no_mapa(self, pygame, event, mapa):
         if (event == pygame.K_w):

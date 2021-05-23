@@ -48,6 +48,8 @@ while (menu_principal_ativo == True):
             if (event.type == KEYDOWN):
                 if ((event.key == pygame.K_w) or (event.key == pygame.K_a) or (event.key == pygame.K_s) or (event.key == pygame.K_d)):
                     edd.navega_no_mapa(pygame, event.key, fase_atual.mapa_da_fase)
+                    if (fase_atual.mapa_da_fase.verifica_capsula(pygame, edd)):
+                        pass
                     fase_atual.mapa_da_fase.verifica_armadilha_robomba(pygame, edd)
                     edd.radar_robombas(pygame, fase_atual.mapa_da_fase.robombas)
                     if (edd.sobrevive() == False):
