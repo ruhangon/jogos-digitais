@@ -5,8 +5,8 @@ class Personagem:
         self.hp = 10
         self.largura = 3
         self.altura = 1
-        guarda_capsulas = GuardaCapsulas()
-        self.equipamento_atual = 0
+        self.guarda_capsulas = GuardaCapsulas()
+        self.item_atual = 0
 
     def navega_no_mapa(self, pygame, event, mapa):
         if (event == pygame.K_w):
@@ -109,4 +109,17 @@ class Personagem:
         if (robombas_localizados != ''):
             frase = 'Radar do Edd: ' + robombas_localizados
             o.speak(frase, interrupt=True)
+
+    def pega_capsula(self):
+        self.guarda_capsulas.insere()
+
+    def altera_item(self, pygame, event):
+        if (event == pygame.K_LEFT):
+            self.item_atual = 0
+        elif (event == pygame.K_RIGHT):
+            self.item_atual = 0
+
+    def mostra_informacoes_do_item_atual(self):
+        if (self.item_atual == 0):
+            self.guarda_capsulas.mostra_informacoes()
 

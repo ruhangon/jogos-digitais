@@ -49,7 +49,7 @@ while (menu_principal_ativo == True):
                 if ((event.key == pygame.K_w) or (event.key == pygame.K_a) or (event.key == pygame.K_s) or (event.key == pygame.K_d)):
                     edd.navega_no_mapa(pygame, event.key, fase_atual.mapa_da_fase)
                     if (fase_atual.mapa_da_fase.verifica_capsula(pygame, edd)):
-                        pass
+                        edd.pega_capsula()
                     fase_atual.mapa_da_fase.verifica_armadilha_robomba(pygame, edd)
                     edd.radar_robombas(pygame, fase_atual.mapa_da_fase.robombas)
                     if (edd.sobrevive() == False):
@@ -69,10 +69,17 @@ while (menu_principal_ativo == True):
                         elif (acao_menu == 'sair do jogo'):
                             pygame.quit()
                             sys.exit()
+
+                elif ((event.key == pygame.K_LEFT) or (event.key == pygame.K_RIGHT)):
+                    edd.altera_item(pygame, event.key)
+                    edd.mostra_informacoes_do_item_atual()
+
                 elif (event.key == pygame.K_1):
                     edd.mostra_informacoes_do_personagem()
+
                 elif (event.key == pygame.K_2):
                     edd.mostra_coordenadas_do_personagem()
+
                 elif (event.key == pygame.K_r):
                     edd.rastreia_robombas(pygame, fase_atual.mapa_da_fase.robombas)
 
