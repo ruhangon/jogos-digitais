@@ -1,15 +1,21 @@
 class Mapa:
     def __init__(self, largura, altura):
+        from porta import Porta
         self.largura = largura
         self.altura = altura
         self.robombas = []
         self.capsulas = []
+        self.porta_de_saida = Porta()
 
     def prepara_robombas(self, posicoes_dos_robombas):
         self.robombas = posicoes_dos_robombas
 
     def prepara_capsulas(self, posicoes_das_capsulas):
         self.capsulas = posicoes_das_capsulas
+
+    def posiciona_porta(self, pos_porta):
+        self.porta_de_saida.largura = pos_porta[0]
+        self.porta_de_saida.altura = pos_porta[1]
 
     def verifica_armadilha_robomba(self, pygame, personagem):
         robomba_atual = 0
