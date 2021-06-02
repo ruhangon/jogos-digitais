@@ -48,8 +48,9 @@ while (menu_principal_ativo == True):
             if (event.type == KEYDOWN):
                 if ((event.key == pygame.K_w) or (event.key == pygame.K_a) or (event.key == pygame.K_s) or (event.key == pygame.K_d)):
                     edd.navega_no_mapa(pygame, event.key, fase_atual.mapa_da_fase)
-                    if (fase_atual.mapa_da_fase.verifica_capsula(pygame, edd)):
-                        edd.pega_capsula()
+                    if (fase_atual.mapa_da_fase.verifica_bateria(pygame, edd)):
+                        edd.pega_bateria()
+                    edd.localiza_porta(fase_atual.mapa_da_fase)
                     fase_atual.mapa_da_fase.verifica_armadilha_robomba(pygame, edd)
                     edd.radar_robombas(pygame, fase_atual.mapa_da_fase.robombas)
                     if (edd.sobrevive() == False):
@@ -73,6 +74,10 @@ while (menu_principal_ativo == True):
                 elif ((event.key == pygame.K_LEFT) or (event.key == pygame.K_RIGHT)):
                     edd.altera_item(pygame, event.key)
                     edd.mostra_informacoes_do_item_atual()
+
+                elif (event.key == pygame.K_UP):
+                    if (edd.item_atual == 0):
+                        edd.insere_bateria_na_porta(pygame, fase_atual.mapa_da_fase)
 
                 elif (event.key == pygame.K_1):
                     edd.mostra_informacoes_do_personagem()

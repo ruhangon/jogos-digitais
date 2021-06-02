@@ -1,11 +1,11 @@
 class Personagem:
     def __init__(self):
-        from item.guarda_capsulas import GuardaCapsulas
+        from item.guarda_baterias import GuardaBaterias
         self.nome = 'Edd'
         self.hp = 10
         self.largura = 3
         self.altura = 1
-        self.guarda_capsulas = GuardaCapsulas()
+        self.guarda_baterias = GuardaBaterias()
         self.item_atual = 0
 
     def navega_no_mapa(self, pygame, event, mapa):
@@ -110,8 +110,20 @@ class Personagem:
             frase = 'Radar do Edd: ' + robombas_localizados
             o.speak(frase, interrupt=True)
 
-    def pega_capsula(self):
-        self.guarda_capsulas.insere()
+    def pega_bateria(self):
+        self.guarda_baterias.insere()
+
+    def localiza_porta(self, mapa):
+        from accessible_output2.outputs.auto import Auto
+        o = Auto()
+        if ((self.largura == mapa.porta_de_saida.largura) and (self.altura == mapa.porta_de_saida.altura)):
+            frase = 'Edd: A porta de saída dessa fase está aqui. Você pode inserir uma bateria energizada nela se tiver. Para isso encontre suas baterias com seta para esquerda ou seta para direita e quando encontrar aperte seta para cima.'
+            o.speak(frase, interrupt=True)
+
+    def insere_bateria_na_porta(self, pygame, mapa):
+        if ((self.largura == mapa.porta_de_saida.largura) and (self.altura == mapa.porta_de_saida.altura)):
+            if (self.guarda_baterias.retira() == True):
+                mapa.porta_de_saida.insere_bateria_energizada(pygame, True)
 
     def altera_item(self, pygame, event):
         if (event == pygame.K_LEFT):
@@ -121,5 +133,5 @@ class Personagem:
 
     def mostra_informacoes_do_item_atual(self):
         if (self.item_atual == 0):
-            self.guarda_capsulas.mostra_informacoes()
+            self.guarda_baterias.mostra_informacoes()
 

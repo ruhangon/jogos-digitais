@@ -4,14 +4,14 @@ class Mapa:
         self.largura = largura
         self.altura = altura
         self.robombas = []
-        self.capsulas = []
+        self.baterias = []
         self.porta_de_saida = Porta()
 
     def prepara_robombas(self, posicoes_dos_robombas):
         self.robombas = posicoes_dos_robombas
 
-    def prepara_capsulas(self, posicoes_das_capsulas):
-        self.capsulas = posicoes_das_capsulas
+    def prepara_baterias(self, posicoes_das_baterias):
+        self.baterias = posicoes_das_baterias
 
     def posiciona_porta(self, pos_porta):
         self.porta_de_saida.largura = pos_porta[0]
@@ -29,14 +29,14 @@ class Mapa:
                 break
             robomba_atual += 1
 
-    def verifica_capsula(self, pygame, personagem):
-        capsula_atual = 0
-        for pos_capsulas in self.capsulas:
-            if ((personagem.largura == pos_capsulas[0]) and (personagem.altura == pos_capsulas[1])):
-                som_capsula = 'sons/efeitos/achou_capsula.wav'
-                som = pygame.mixer.Sound(som_capsula)
+    def verifica_bateria(self, pygame, personagem):
+        bateria_atual = 0
+        for pos_baterias in self.baterias:
+            if ((personagem.largura == pos_baterias[0]) and (personagem.altura == pos_baterias[1])):
+                som_bateria = 'sons/efeitos/achou_bateria.wav'
+                som = pygame.mixer.Sound(som_bateria)
                 som.play()
-                self.capsulas.pop(capsula_atual)
+                self.baterias.pop(bateria_atual)
                 return True
-            capsula_atual += 1
+            bateria_atual += 1
 

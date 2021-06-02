@@ -3,17 +3,17 @@ class Porta:
         self.largura = -1
         self.altura = -1
         self.trancada = True
-        self.capsulas_energizadas = 0
+        self.baterias_energizadas = 0
 
-    def insere_capsula_energizada(self, pygame, tem_capsula):
-        if (tem_capsula == True):
-            self.capsulas_energizadas += 1
-            som_capsula_inserida = 'sons/efeitos/inseriu_capsula.wav'
-            som = pygame.mixer.Sound(som_capsula_inserida)
+    def insere_bateria_energizada(self, pygame, tem_bateria):
+        if (tem_bateria == True):
+            self.baterias_energizadas += 1
+            som_bateria_inserida = 'sons/efeitos/inseriu_bateria.wav'
+            som = pygame.mixer.Sound(som_bateria_inserida)
             som.play()
 
     def abre_porta(self, pygame):
-        if (self.capsulas_energizadas == 3):
+        if (self.baterias_energizadas == 3):
             self.trancada = False
             som_abertura = 'sons/efeitos/abriu_porta.wav'
             som = pygame.mixer.Sound(som_abertura)
