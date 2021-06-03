@@ -40,3 +40,21 @@ class Mapa:
                 return True
             bateria_atual += 1
 
+    def encontra_saida(self, pygame):
+        from accessible_output2.outputs.auto import Auto
+        o = Auto()
+        frase = 'ISA: Parabéns! Você encontrou a saída. Pressione enter para seguir.'
+        o.speak(frase, interrupt=True)
+        while (True):
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+                if (event.type == pygame.KEYDOWN):
+                    if ((event.key == pygame.K_UP) or (event.key == pygame.K_DOWN)):
+                        o.speak(frase, interrupt=True)
+
+                    if (event.key == pygame.K_RETURN):
+                        return
+

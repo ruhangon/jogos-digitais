@@ -121,9 +121,28 @@ class Personagem:
             o.speak(frase, interrupt=True)
 
     def insere_bateria_na_porta(self, pygame, mapa):
+        from accessible_output2.outputs.auto import Auto
+        o = Auto()
         if ((self.largura == mapa.porta_de_saida.largura) and (self.altura == mapa.porta_de_saida.altura)):
             if (self.guarda_baterias.retira() == True):
                 mapa.porta_de_saida.insere_bateria_energizada(pygame, True)
+                if (mapa.porta_de_saida.baterias_energizadas == 3):
+                    som_porta_energizada = 'sons/efeitos/porta_energizada.wav'
+                    som = pygame.mixer.Sound(som_porta_energizada)
+                    som.play()
+                    frase = 'Edd: A porta está energizada. Pressione enter para abrir ela e assim poder finalizar a fase.'
+                    o.speak(frase, interrupt=False)
+            else:
+                frase = 'Edd: Você não tem baterias no topo da pilha.'
+                o.speak(frase, interrupt=True)
+
+    def abre_porta(self, pygame, mapa):
+        if ((self.largura == mapa.porta_de_saida.largura) and (self.altura == mapa.porta_de_saida.altura)):
+            if (mapa.porta_de_saida.baterias_energizadas == 3):
+                mapa.porta_de_saida.trancada = False
+                som_completou_fase = 'sons/efeitos/completou_fase.wav'
+                som = pygame.mixer.Sound(som_completou_fase)
+                som.play()
 
     def altera_item(self, pygame, event):
         if (event == pygame.K_LEFT):

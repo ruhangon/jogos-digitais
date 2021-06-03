@@ -79,6 +79,9 @@ while (menu_principal_ativo == True):
                     if (edd.item_atual == 0):
                         edd.insere_bateria_na_porta(pygame, fase_atual.mapa_da_fase)
 
+                elif (event.key == pygame.K_RETURN):
+                    edd.abre_porta(pygame, fase_atual.mapa_da_fase)
+
                 elif (event.key == pygame.K_1):
                     edd.mostra_informacoes_do_personagem()
 
@@ -87,4 +90,7 @@ while (menu_principal_ativo == True):
 
                 elif (event.key == pygame.K_r):
                     edd.rastreia_robombas(pygame, fase_atual.mapa_da_fase.robombas)
+
+                if (fase_atual.mapa_da_fase.porta_de_saida.trancada == False):
+                    fase_atual.mapa_da_fase.encontra_saida(pygame)
 

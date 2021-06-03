@@ -16,7 +16,7 @@ class GuardaBaterias:
         if (len(self.baterias) > 0):
             bat = self.baterias.pop()
             frase = 'Edd: A bateria energizada do topo da pilha do guarda baterias foi retirada.'
-            o.speak(frase, interrupt=True)
+            o.speak(frase, interrupt=False)
             return bat
 
     def mostra_informacoes(self):
