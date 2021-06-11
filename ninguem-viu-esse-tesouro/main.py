@@ -21,8 +21,8 @@ menu_principal.adiciona_item('sair do jogo')
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
-fase = 1
 edd = Personagem()
+fase = 1
 
 menu_principal_ativo = True
 while (menu_principal_ativo == True):
@@ -35,10 +35,9 @@ while (menu_principal_ativo == True):
         sys.exit()
 
     if (menu_principal_ativo == False):
-        if (fase == 1):
-            fase_atual = PrimeiraFase()
-            # fase_atual.dialogos.mostra_dialogos_iniciais(pygame)
-            sobrevive = True
+        fase_atual = PrimeiraFase()
+        fase_atual.dialogos.mostra_dialogos_iniciais(pygame)
+        sobrevive = True
     while (menu_principal_ativo == False):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -66,7 +65,7 @@ while (menu_principal_ativo == True):
                             if (fase == 1):
                                 fase_atual = PrimeiraFase()
                                 edd.revive()
-                                # fase_atual.dialogos.mostra_dialogos_iniciais(pygame)
+                                fase_atual.dialogos.mostra_dialogos_iniciais(pygame)
                         elif (acao_menu == 'sair do jogo'):
                             pygame.quit()
                             sys.exit()
@@ -81,6 +80,25 @@ while (menu_principal_ativo == True):
 
                 elif (event.key == pygame.K_RETURN):
                     edd.abre_porta(pygame, fase_atual.mapa_da_fase)
+                    if (fase_atual.mapa_da_fase.porta_de_saida.trancada == False):
+                        fase_atual.dialogos.mostra_dialogos_finais(pygame)
+                        dir_trilha_menu = 'sons/trilhas/menu_vitoria.mp3'
+                        menu_vitoria = Menu(pygame, dir_trilha_menu)
+                        menu_vitoria.adiciona_item('ir para a próxima fase')
+                        menu_vitoria.adiciona_item('sair do jogo')
+                        pygame.mixer.music.set_volume(0.1)
+                        pygame.mixer.music.play(-1)
+                        acao_menu = menu_vitoria.faz_acao(pygame)
+                        if (acao_menu == 'ir para a próxima fase'):
+                            pygame.mixer.music.stop()
+                            if (fase == 1):
+                                fase += 1
+                                fase_atual = SegundaFase()
+                                edd.revive()
+                                fase_atual.dialogos.mostra_dialogos_iniciais(pygame)
+                        elif (acao_menu == 'sair do jogo'):
+                            pygame.quit()
+                            sys.exit()
 
                 elif (event.key == pygame.K_1):
                     edd.mostra_informacoes_do_personagem()

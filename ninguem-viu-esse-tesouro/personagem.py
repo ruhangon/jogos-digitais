@@ -143,6 +143,10 @@ class Personagem:
                 som_completou_fase = 'sons/efeitos/completou_fase.wav'
                 som = pygame.mixer.Sound(som_completou_fase)
                 som.play()
+            else:
+                som_porta_trancada = 'sons/efeitos/porta_trancada.wav'
+                som = pygame.mixer.Sound(som_porta_trancada)
+                som.play()
 
     def altera_item(self, pygame, event):
         if (event == pygame.K_LEFT):

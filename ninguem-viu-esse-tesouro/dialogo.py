@@ -18,7 +18,12 @@ class Dialogo:
                     if (event.key == pygame.K_RETURN):
                         frase_atual = self.iniciais.popleft()
                         o.speak(frase_atual, interrupt=True)
-                    if (event.key == pygame.K_SPACE):
+                    elif ((event.key == pygame.K_UP) or (event.key == pygame.K_DOWN)):
+                        o.speak(frase_atual, interrupt=True)
+                    elif (event.key == pygame.K_ESCAPE):
+                        self.iniciais.clear()
+                        self.iniciais.append('Pressione enter para iniciar a fase.')
+                        frase_atual = self.iniciais.popleft()
                         o.speak(frase_atual, interrupt=True)
 
     def mostra_dialogos_finais(self, pygame):
@@ -35,6 +40,8 @@ class Dialogo:
                     if (event.key == pygame.K_RETURN):
                         frase_atual = self.finais.popleft()
                         o.speak(frase_atual, interrupt=True)
-                    if (event.key == pygame.K_SPACE):
+                    elif ((event.key == pygame.K_UP) or (event.key == pygame.K_DOWN)):
                         o.speak(frase_atual, interrupt=True)
+                    elif (event.key == pygame.K_ESCAPE):
+                        self.finais.clear()
 
