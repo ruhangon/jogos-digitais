@@ -1,8 +1,9 @@
 class Menu:
-    def __init__(self, pygame, dir_trilha):
+    def __init__(self, pygame, dir_trilha = None):
         self.lista_opcoes = []
         self.ponteiro = 0
-        self.musica = pygame.mixer.music.load(dir_trilha)
+        if (dir_trilha != None):
+            self.musica = pygame.mixer.music.load(dir_trilha)
 
     def adiciona_item(self, item):
         self.lista_opcoes.append(str(item))
@@ -32,8 +33,5 @@ class Menu:
                             o.speak(self.lista_opcoes[self.ponteiro], interrupt=True)
 
                     elif (event.key == pygame.K_RETURN):
-                        som_enter = 'sons/efeitos/enter.wav'
-                        som = pygame.mixer.Sound(som_enter)
-                        som.play()
                         return self.lista_opcoes[self.ponteiro]
 

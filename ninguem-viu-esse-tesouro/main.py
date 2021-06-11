@@ -14,9 +14,26 @@ pygame.display.set_caption('Ninguém viu esse tesouro')
 
 tela.fill((255, 255, 255))
 
+# menu de teclas
+menu_de_teclas = Menu(pygame)
+menu_de_teclas.adiciona_item('menu de ajuda com as teclas')
+menu_de_teclas.adiciona_item('seta para cima ou seta para baixo: navega por menus / repete diálogos')
+menu_de_teclas.adiciona_item('enter: seleciona opção do menu / avança em diálogos')
+menu_de_teclas.adiciona_item('esc: retroscede no menu / pausa o jogo')
+menu_de_teclas.adiciona_item('w, a, s, d: movimenta o personagem')
+menu_de_teclas.adiciona_item('seta para esquerda ou seta para direita: navega pelos seus itens')
+menu_de_teclas.adiciona_item('barra de espaço: interage com item selecionado com as setas')
+menu_de_teclas.adiciona_item('r: rastreia robombas próximos')
+menu_de_teclas.adiciona_item('1: informações do personagem, seu nome e seu hp atual')
+menu_de_teclas.adiciona_item('2: coordenadas atuais do personagem')
+menu_de_teclas.adiciona_item('voltar para o menu principal')
+
+# menu principal
 dir_trilha_menu = 'sons/trilhas/menu_principal.mp3'
 menu_principal = Menu(pygame, dir_trilha_menu)
 menu_principal.adiciona_item('novo jogo')
+menu_principal.adiciona_item('ajuda com as teclas')
+menu_principal.adiciona_item('ajuda com os sons')
 menu_principal.adiciona_item('sair do jogo')
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
@@ -28,8 +45,25 @@ menu_principal_ativo = True
 while (menu_principal_ativo == True):
     acao_menu = menu_principal.faz_acao(pygame)
     if (acao_menu == 'novo jogo'):
+        som_enter = 'sons/efeitos/enter.wav'
+        som = pygame.mixer.Sound(som_enter)
+        som.play()
         pygame.mixer.music.stop()
         menu_principal_ativo = False
+    elif (acao_menu == 'ajuda com as teclas'):
+        som_enter = 'sons/efeitos/enter.wav'
+        som = pygame.mixer.Sound(som_enter)
+        som.play()
+        acao_menu = ''
+        while (True):
+            acao_menu = menu_de_teclas.faz_acao(pygame)
+            if (acao_menu == 'voltar para o menu principal'):
+                som_esc = 'sons/efeitos/esc.wav'
+                som = pygame.mixer.Sound(som_esc)
+                som.play()
+                break
+        menu_principal.ponteiro = 0
+        menu_de_teclas.ponteiro = 0
     elif (acao_menu == 'sair do jogo'):
         pygame.quit()
         sys.exit()
@@ -61,6 +95,9 @@ while (menu_principal_ativo == True):
                         pygame.mixer.music.play(-1)
                         acao_menu = menu_derrota.faz_acao(pygame)
                         if (acao_menu == 'reiniciar fase'):
+                            som_enter = 'sons/efeitos/enter.wav'
+                            som = pygame.mixer.Sound(som_enter)
+                            som.play()
                             pygame.mixer.music.stop()
                             if (fase == 1):
                                 fase_atual = PrimeiraFase()
@@ -74,7 +111,7 @@ while (menu_principal_ativo == True):
                     edd.altera_item(pygame, event.key)
                     edd.mostra_informacoes_do_item_atual()
 
-                elif (event.key == pygame.K_UP):
+                elif (event.key == pygame.K_SPACE):
                     if (edd.item_atual == 0):
                         edd.insere_bateria_na_porta(pygame, fase_atual.mapa_da_fase)
 
