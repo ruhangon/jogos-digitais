@@ -18,6 +18,8 @@ class Mapa:
         self.porta_de_saida.altura = pos_porta[1]
 
     def verifica_armadilha_robomba(self, pygame, personagem):
+        from accessible_output2.outputs.auto import Auto
+        o = Auto()
         robomba_atual = 0
         for pos_robombas in self.robombas:
             if ((personagem.largura == pos_robombas[0]) and (personagem.altura == pos_robombas[1])):
@@ -25,6 +27,8 @@ class Mapa:
                 som = pygame.mixer.Sound(som_explosao)
                 som.play()
                 personagem.hp -= 5
+                frase = 'Edd: Acho que pisei em um robomba.'
+                o.speak(frase, interrupt=True)
                 self.robombas.pop(robomba_atual)
                 break
             robomba_atual += 1
@@ -39,22 +43,4 @@ class Mapa:
                 self.baterias.pop(bateria_atual)
                 return True
             bateria_atual += 1
-
-    def encontra_saida(self, pygame):
-        from accessible_output2.outputs.auto import Auto
-        o = Auto()
-        frase = 'ISA: Parabéns! Você encontrou a saída. Pressione enter para seguir.'
-        o.speak(frase, interrupt=True)
-        while (True):
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-
-                if (event.type == pygame.KEYDOWN):
-                    if ((event.key == pygame.K_UP) or (event.key == pygame.K_DOWN)):
-                        o.speak(frase, interrupt=True)
-
-                    if (event.key == pygame.K_RETURN):
-                        return
 

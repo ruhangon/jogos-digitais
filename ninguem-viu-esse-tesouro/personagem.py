@@ -77,22 +77,32 @@ class Personagem:
         self.altura = 1
 
     def radar_robombas(self, pygame, pos_robombas):
+        from accessible_output2.outputs.auto import Auto
+        o = Auto()
+        alerta_robomba = False
         if ([(self.largura+1), self.altura] in pos_robombas):
             som_radar_robomba = 'sons/efeitos/radar_robomba.wav'
             som = pygame.mixer.Sound(som_radar_robomba)
             som.play()
+            alerta_robomba = True
         elif ([(self.largura-1), self.altura] in pos_robombas):
             som_radar_robomba = 'sons/efeitos/radar_robomba.wav'
             som = pygame.mixer.Sound(som_radar_robomba)
             som.play()
+            alerta_robomba = True
         elif ([self.largura, (self.altura-1)] in pos_robombas):
             som_radar_robomba = 'sons/efeitos/radar_robomba.wav'
             som = pygame.mixer.Sound(som_radar_robomba)
             som.play()
+            alerta_robomba = True
         elif ([self.largura, (self.altura+1)] in pos_robombas):
             som_radar_robomba = 'sons/efeitos/radar_robomba.wav'
             som = pygame.mixer.Sound(som_radar_robomba)
             som.play()
+            alerta_robomba = True
+        if (alerta_robomba == True):
+            frase = 'Edd: Há pelo menos um robomba localizado.'
+            o.speak(frase, interrupt=False)
 
     def rastreia_robombas(self, pygame, pos_robombas):
         from accessible_output2.outputs.auto import Auto

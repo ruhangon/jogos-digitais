@@ -8,7 +8,7 @@ class GuardaBaterias:
         o = Auto()
         self.baterias.append(True)
         frase = 'Edd: Uma bateria foi adicionada ao topo da pilha do guarda baterias e será energizada.'
-        o.speak(frase, interrupt=True)
+        o.speak(frase, interrupt=False)
 
     def retira(self):
         from accessible_output2.outputs.auto import Auto

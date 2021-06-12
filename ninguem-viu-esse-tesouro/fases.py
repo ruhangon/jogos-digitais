@@ -49,7 +49,34 @@ class PrimeiraFase:
 
     def prepara_dialogos_finais(self):
         self.dialogos.finais.append('Inteligência artificial: Bom trabalho!')
-        self.dialogos.finais.append('Inteligência artificial: Mas não pense que as próximas fases serão fáceis como essa. O grande desafio apenas começou.')
+        self.dialogos.finais.append('Inteligência artificial: Você completou a primeira fase.')
         self.dialogos.finais.append('Inteligência artificial: Lembre-se que sempre que precisar você poderá conferir o conhecimento de como funciona pilhas lá no menu de ajuda das estruturas de dados.')
         self.dialogos.finais.append('Inteligência artificial: Boa sorte na próxima fase.')
+
+class SegundaFase:
+    def __init__(self):
+        from dialogo import Dialogo
+        from mapa import Mapa
+        self.mapa_da_fase = Mapa(5, 6)
+        self.mapa_da_fase.prepara_robombas([[1, 4], [2, 4], [3,4], [4, 4]])
+        self.mapa_da_fase.prepara_baterias([[1, 3], [5, 4], [1, 5]])
+        self.mapa_da_fase.posiciona_porta([3, 6])
+        self.dialogos = Dialogo()
+        self.prepara_dialogos_iniciais()
+        self.prepara_dialogos_finais()
+
+    def prepara_dialogos_iniciais(self):
+        self.dialogos.iniciais.append('Inteligência artificial: Seja bem vindo a segunda fase.')
+        self.dialogos.iniciais.append('Inteligência artificial: Agora que estamos nos conhecendo melhor, posso dizer para você que a primeira fase foi apenas uma brincadeira.')
+        self.dialogos.iniciais.append('Inteligência artificial: A cada nova fase os desafios ficarão mais difíceis e você precisará tomar mais cuidado.')
+        self.dialogos.iniciais.append('Inteligência artificial: Não sei porque estou comentando isso com você. Não acredito que vá conseguir chegar muito longe.')
+        self.dialogos.iniciais.append('Inteligência artificial: De qualquer forma, saiba que seu objetivo continua sendo o mesmo de antes e a porta continua ao norte.')
+        self.dialogos.iniciais.append('Inteligência artificial: Essa fase não terá nenhuma novidade em relação a itens.')
+        self.dialogos.iniciais.append('Pressione enter para iniciar a fase.')
+
+    def prepara_dialogos_finais(self):
+        self.dialogos.finais.append('Inteligência artificial: Impressionante!')
+        self.dialogos.finais.append('Inteligência artificial: Estou surpresa que tenha conseguido chegar a essa saída.')
+        self.dialogos.finais.append('Inteligência artificial: Bom, todos tem um pouco de sorte. Não seria diferente com você.')
+        self.dialogos.finais.append('Inteligência artificial: Nos encontramos na próxima fase.')
 

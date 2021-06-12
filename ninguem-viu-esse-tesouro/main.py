@@ -1,4 +1,4 @@
-from fases import PrimeiraFase
+from fases import PrimeiraFase, SegundaFase
 from menu import Menu
 from personagem import Personagem
 from pygame.locals import *
@@ -103,6 +103,10 @@ while (menu_principal_ativo == True):
                                 fase_atual = PrimeiraFase()
                                 edd.revive()
                                 fase_atual.dialogos.mostra_dialogos_iniciais(pygame)
+                            elif (fase == 2):
+                                fase_atual = SegundaFase()
+                                edd.revive()
+                                fase_atual.dialogos.mostra_dialogos_iniciais(pygame)
                         elif (acao_menu == 'sair do jogo'):
                             pygame.quit()
                             sys.exit()
@@ -145,7 +149,4 @@ while (menu_principal_ativo == True):
 
                 elif (event.key == pygame.K_r):
                     edd.rastreia_robombas(pygame, fase_atual.mapa_da_fase.robombas)
-
-                if (fase_atual.mapa_da_fase.porta_de_saida.trancada == False):
-                    fase_atual.mapa_da_fase.encontra_saida(pygame)
 
