@@ -19,6 +19,7 @@ menu_de_teclas = Menu(pygame)
 menu_de_teclas.adiciona_item('menu de ajuda com as teclas')
 menu_de_teclas.adiciona_item('seta para cima ou seta para baixo: navega por menus / repete diálogos')
 menu_de_teclas.adiciona_item('enter: seleciona opção do menu / avança em diálogos')
+menu_de_teclas.adiciona_item('esc: pula diálogo da fase atual')
 menu_de_teclas.adiciona_item('w, a, s, d: movimenta o personagem')
 menu_de_teclas.adiciona_item('seta para esquerda ou seta para direita: navega pelos seus itens')
 menu_de_teclas.adiciona_item('barra de espaço: interage com item selecionado com as setas')
@@ -28,11 +29,20 @@ menu_de_teclas.adiciona_item('1: informações do personagem, seu nome e seu hp 
 menu_de_teclas.adiciona_item('2: coordenadas atuais do personagem')
 menu_de_teclas.adiciona_item('voltar para o menu principal')
 
+# menu de créditos
+menu_de_creditos = Menu(pygame)
+menu_de_creditos.adiciona_item('créditos')
+menu_de_creditos.adiciona_item('Efeitos sonoros por Eric Matyas. Site: www.soundimage.org')
+menu_de_creditos.adiciona_item('Música por Eric Matyas. Site: www.soundimage.org')
+menu_de_creditos.adiciona_item('Desenvolvido por Ruhan Gonçalves')
+menu_de_creditos.adiciona_item('voltar para o menu principal')
+
 # menu principal
 dir_trilha_menu = 'sons/trilhas/menu_principal.mp3'
 menu_principal = Menu(pygame, dir_trilha_menu)
 menu_principal.adiciona_item('novo jogo')
 menu_principal.adiciona_item('ajuda com as teclas')
+menu_principal.adiciona_item('créditos')
 menu_principal.adiciona_item('sair do jogo')
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
@@ -63,6 +73,20 @@ while (menu_principal_ativo == True):
                 break
         menu_principal.ponteiro = 0
         menu_de_teclas.ponteiro = 0
+    elif (acao_menu == 'créditos'):
+        som_enter = 'sons/efeitos/enter.wav'
+        som = pygame.mixer.Sound(som_enter)
+        som.play()
+        acao_menu = ''
+        while (True):
+            acao_menu = menu_de_creditos.faz_acao(pygame)
+            if (acao_menu == 'voltar para o menu principal'):
+                som_esc = 'sons/efeitos/esc.wav'
+                som = pygame.mixer.Sound(som_esc)
+                som.play()
+                break
+        menu_principal.ponteiro = 0
+        menu_de_creditos.ponteiro = 0
     elif (acao_menu == 'sair do jogo'):
         pygame.quit()
         sys.exit()

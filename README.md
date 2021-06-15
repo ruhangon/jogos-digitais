@@ -14,3 +14,13 @@ Nesse jogo você é um profissional aposentado que vive uma vida monótona. Um c
 
 Os desafios consistem em ajudar o robô Edd a passar por fases, até completar todas elas. No caminho você terá a possibilidade de aprender um pouco mais sobre estrutura de dados, ao mesmo tempo que aprende mais sobre a história desse jogo e se diverte com os desafios.
 
+## Créditos
+
+* Efeitos sonoros por Eric Matyas:
+www.soundimage.org
+
+* Música por Eric Matyas
+www.soundimage.org
+
+* Desenvolvido por Ruhan Gonçalves
+
