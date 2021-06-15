@@ -5,6 +5,7 @@ class Mapa:
         self.altura = altura
         self.robombas = []
         self.baterias = []
+        self.municoes = []
         self.porta_de_saida = Porta()
 
     def prepara_robombas(self, posicoes_dos_robombas):
@@ -12,6 +13,9 @@ class Mapa:
 
     def prepara_baterias(self, posicoes_das_baterias):
         self.baterias = posicoes_das_baterias
+
+    def prepara_municoes(self, posicoes_das_municoes):
+        self.municoes = posicoes_das_municoes
 
     def posiciona_porta(self, pos_porta):
         self.porta_de_saida.largura = pos_porta[0]
@@ -43,4 +47,12 @@ class Mapa:
                 self.baterias.pop(bateria_atual)
                 return True
             bateria_atual += 1
+
+    def verifica_municao(self, pygame, personagem):
+        municao_atual = 0
+        for pos_municoes in self.municoes:
+            if ((personagem.largura == pos_municoes[0]) and (personagem.altura == pos_municoes[1])):
+                self.municoes.pop(municao_atual)
+                return True
+            municao_atual += 1
 
