@@ -77,6 +77,13 @@ class Personagem:
         self.hp = 10
         self.largura = 3
         self.altura = 1
+        self.guarda_baterias.baterias.clear()
+        self.arma.municao.clear()
+
+    def passa_de_fase(self):
+        self.hp = 10
+        self.largura = 3
+        self.altura = 1
 
     def radar_robombas(self, pygame, pos_robombas):
         from accessible_output2.outputs.auto import Auto

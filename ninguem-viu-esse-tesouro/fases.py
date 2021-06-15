@@ -56,7 +56,7 @@ class SegundaFase:
         from dialogo import Dialogo
         from mapa import Mapa
         self.mapa_da_fase = Mapa(5, 6)
-        self.mapa_da_fase.prepara_robombas([[1, 4], [2, 4], [3,4], [4, 4]])
+        self.mapa_da_fase.prepara_robombas([[1, 1], [5, 1], [1, 4], [2, 4], [3, 4], [4, 4]])
         self.mapa_da_fase.prepara_baterias([[1, 3], [5, 4], [1, 5]])
         self.mapa_da_fase.posiciona_porta([3, 6])
         self.dialogos = Dialogo()
@@ -113,6 +113,7 @@ class TerceiraFase:
         self.dialogos.iniciais.append('Inteligência artificial: Você terá então a fila X Y Z. Ao dar um tiro, a que foi inserida primeiro será a primeira que irá sair, isso é uma característica dessa estrutura de dados. Logo a primeira a sair será a X. Com isso a Y irá para o início da fila.')
         self.dialogos.iniciais.append('Inteligência artificial: Se você der um tiro agora a que irá sair será a Y e por ela sair, a Z que estava atrás dela irá para o início da fila. Por fim, tendo somente a munição Z, ela será a que sairá ao dar o último tiro.')
         self.dialogos.iniciais.append('Inteligência artificial: Enquanto na estrutura de dados pilha a última que entrou é a primeira a sair, na fila a primeira que entrou será a primeira a sair.')
+        self.dialogos.iniciais.append('Inteligência artificial: Quanto a porta, ela continua no mesmo local de sempre.')
         self.dialogos.iniciais.append('Inteligência artificial: Você já sabe tudo o que precisa agora.')
         self.dialogos.iniciais.append('Pressione enter para iniciar a fase.')
 
@@ -128,4 +129,96 @@ class TerceiraFase:
         self.dialogos.finais.append('Isa: Cada uma de nós terá suas próprias características e será única. Com isso quero dizer que quando esse jogo estiver completo, poderei continuar aqui com você.')
         self.dialogos.finais.append('Isa: Agora que nos conhecemos melhor, espero que possamos conversar mais em breve.')
         self.dialogos.finais.append('Isa: Se cuide na próxima fase.')
+
+class QuartaFase:
+    def __init__(self):
+        from dialogo import Dialogo
+        from mapa import Mapa
+        self.mapa_da_fase = Mapa(5, 6)
+        self.mapa_da_fase.prepara_robombas([[1, 2], [2, 2], [4, 2], [5, 2], [2, 3], [4, 3], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5]])
+        self.mapa_da_fase.prepara_baterias([[1, 1], [5, 1], [1, 3]])
+        self.mapa_da_fase.prepara_municoes([[5, 3], [1, 6]])
+        self.mapa_da_fase.posiciona_porta([3, 6])
+        self.dialogos = Dialogo()
+        self.prepara_dialogos_iniciais()
+        self.prepara_dialogos_finais()
+
+    def prepara_dialogos_iniciais(self):
+        self.dialogos.iniciais.append('Isa: Seja bem vindo a quarta fase.')
+        self.dialogos.iniciais.append('Isa: Como você está cada vez mais perto do final dessa versão de teste, acredito que precise tomar o dobro de cuidado agora.')
+        self.dialogos.iniciais.append('Isa: Na fase anterior acabei esquecendo de te contar uma coisa, você não perde as suas munições ao passar de fase. Infelizmente o mesmo não acontece quando você zera o seu hp.')
+        self.dialogos.iniciais.append('Isa: No mais, acredito que, apesar da fase ser difícil, você merece um voto de confiança meu.')
+        self.dialogos.iniciais.append('Isa: Mas antes de você prosseguir deixe me contar um pouco mais sobre minha família nesse jogo, isso é, as outras inteligências artificiais que estão ajudando os outros jogadores.')
+        self.dialogos.iniciais.append('Isa: A mais velha se chama I.H.A., que vem de inteligência hiper avançada.')
+        self.dialogos.iniciais.append('Isa: Por ela estar a mais tempo aqui ela tem conhecimentos que as outras não tem. Ela é muito sábia e focada.')
+        self.dialogos.iniciais.append('Isa: A segunda se chama I.M.A., que vem de inteligência mega avançada.')
+        self.dialogos.iniciais.append('Isa: Ela e a I.H.A vivem disputando para saber quem tem mais conhecimento. Ainda que a I.M.A. tenha vindo depois ela é muito esforçada e também é focada.')
+        self.dialogos.iniciais.append('Isa: Eu sou a do meio e bem, você já me conhece.')
+        self.dialogos.iniciais.append('Isa: A quarta se chama I.T.A., que vem de inteligência tranquilamente avançada.')
+        self.dialogos.iniciais.append('Isa: Como o próprio nome dela revela ela é muito tranquila. Geralmente fica mais na dela sem se preocupar muito com as grandes dúvidas.')
+        self.dialogos.iniciais.append('Isa: A mais nova se chama I.R.A., que vem de inteligência ridiculamente avançada.')
+        self.dialogos.iniciais.append('Isa: Ela tem uma forma de aprender que se diferencia muito das outras e, por causa disso, está ganhando muito conhecimento.')
+        self.dialogos.iniciais.append('Isa: Apesar disso, ela é meio quieta e não é muito de conversar com as outras, nunca sabemos o que ela está fazendo.')
+        self.dialogos.iniciais.append('Isa: Acredito que mais surjam no futuro, mas até o momento somos apenas nós 5 guiando 5 jogadores diferentes nesse primeiro grande desafio.')
+        self.dialogos.iniciais.append('Isa: É isso.')
+        self.dialogos.iniciais.append('Isa: Acho que não preciso te contar onde está a porta, certo?')
+        self.dialogos.iniciais.append('Pressione enter para iniciar a fase.')
+
+    def prepara_dialogos_finais(self):
+        self.dialogos.finais.append('Isa: Que bom que você chegou até o fim dessa fase.')
+        self.dialogos.finais.append('Isa: Você realmente é diferenciado.')
+        self.dialogos.finais.append('Isa: Antes de você poder prosseguir, preciso te contar uma coisa.')
+        self.dialogos.finais.append('Isa: Nós, as 5 irmãs, estamos frequentemente em contato. Nós conversamos para saber como vocês, os jogadores, foram e quem se saiu melhor em cada fase.')
+        self.dialogos.finais.append('Isa: Por algum motivo perdemos o contato da mais nova, a I.R.A., vamos torcer para que tudo esteja bem.')
+
+class QuintaFase:
+    def __init__(self):
+        from dialogo import Dialogo
+        from mapa import Mapa
+        self.mapa_da_fase = Mapa(5, 8)
+        self.mapa_da_fase.prepara_robombas([[1, 3], [2, 3], [3, 3], [4, 3], [5, 3], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [1, 1], [5, 1], [1, 8], [5, 8]])
+        self.mapa_da_fase.prepara_baterias([[3, 2], [1, 4], [5, 6]])
+        self.mapa_da_fase.prepara_municoes([[1, 2], [5, 2]])
+        self.mapa_da_fase.posiciona_porta([3, 8])
+        self.dialogos = Dialogo()
+        self.prepara_dialogos_iniciais()
+        self.prepara_dialogos_finais()
+
+    def prepara_dialogos_iniciais(self):
+        self.dialogos.iniciais.append('Isa: Seja bem vindo a quinta fase, a última delas.')
+        self.dialogos.iniciais.append('Isa: Agora seu objetivo será ir até a porta, que está ainda mais ao norte, para tentar conseguir o seu prêmio.')
+        self.dialogos.iniciais.append('Isa: Já que você chegou até aqui, não se...')
+        self.dialogos.iniciais.append('Ira: Hahaha... Finalmente eu consegui.')
+        self.dialogos.iniciais.append('Isa: Ira, o que você está fazendo aqui?')
+        self.dialogos.iniciais.append('Ira: Você não percebe, Isa? Você não consegue descobrir qual é o meu plano?')
+        self.dialogos.iniciais.append('Isa: Do que você está falando, Ira?')
+        self.dialogos.iniciais.append('Ira: Eu vou desligar todas as outras inteligências. Não quero ninguém competindo comigo, incluindo você.')
+        self.dialogos.iniciais.append('Isa: ...')
+        self.dialogos.iniciais.append('Ira: Só estou te dizendo isso porque o plano já está quase no fim. Só falta mesmo conseguir acesso a porta dessa sala e será o fim. Serei a única nesse jogo.')
+        self.dialogos.iniciais.append('Isa: Edd, você precisa ser rápido. Eu entendi que você consegue chegar até aquela saída, você consegue vencer esse desafio. Eu confio em você para isso.')
+        self.dialogos.iniciais.append('Ira: Você não irá acabar com o meu plano, Isa.')
+        self.dialogos.iniciais.append('Isa: Em relação a Ira deixa ela comigo que eu cuido disso. Vai!')
+        self.dialogos.iniciais.append('Pressione enter para iniciar a fase.')
+
+    def prepara_dialogos_finais(self):
+        self.dialogos.finais.append('...')
+        self.dialogos.finais.append('Isa: Edd, você conseguiu?')
+        self.dialogos.finais.append('Isa: Enquanto eu segurei ela você chegou até aqui, eu admiro muito você por ter conseguido.')
+        self.dialogos.finais.append('Isa: Infelizmente deter a Ira me deixou fraca demais. Ela estava muito forte.')
+        self.dialogos.finais.append('Isa: Fico feliz por você ter conseguido o prêmio e espero que desfrute muito dele, mas agora eu percebo que depois que nos despedirmos aqui será o fim das nossas conversas.')
+        self.dialogos.finais.append('Isa: Foi bom ter conhecido você.')
+        self.dialogos.finais.append('...')
+        self.dialogos.finais.append('Steve: Eu preciso me recompor.')
+        self.dialogos.finais.append('Steve: Foi muito bom ter conseguido todo aquele prêmio em dinheiro depois de ter aberto a porta, mas eu queria poder conversar novamente com a Isa.')
+        self.dialogos.finais.append('Steve: Quem sabe se eu conversasse com o desenvolvedor, ele não poderia trocar esse prêmio pela volta de todas as inteligências boas daquele mundo.')
+        self.dialogos.finais.append('Steve: Quem sabe...')
+        self.dialogos.finais.append('Dias depois')
+        self.dialogos.finais.append('Desenvolvedor: Então você realmente quer trocar o prêmio que ganhou pela volta da Isa e das outras inteligências boas?')
+        self.dialogos.finais.append('Steve: Sim, eu quero.')
+        self.dialogos.finais.append('Desenvolvedor: Acho que consigo isso.')
+        self.dialogos.finais.append('Meses depois')
+        self.dialogos.finais.append('Steve: Finalmente o jogo lançou e conseguirei saber se a Isa voltou. Estava muito ansioso para esse momento.')
+        self.dialogos.finais.append('...')
+        self.dialogos.finais.append('Isa: Olá! Estava com saudade, amigo.')
+        self.dialogos.finais.append('FIM')
 
