@@ -11,7 +11,7 @@ class Personagem:
         self.item_atual = 0
 
     def navega_no_mapa(self, pygame, event, mapa):
-        if (event == pygame.K_w):
+        if (event == pygame.K_UP):
             if ((self.altura+1) > mapa.altura):
                 som_parede = 'sons/efeitos/parede.wav'
                 som = pygame.mixer.Sound(som_parede)
@@ -21,7 +21,7 @@ class Personagem:
                 som = pygame.mixer.Sound(som_passos)
                 som.play()
                 self.altura += 1
-        elif (event == pygame.K_s):
+        elif (event == pygame.K_DOWN):
             if ((self.altura-1) < 1):
                 som_parede = 'sons/efeitos/parede.wav'
                 som = pygame.mixer.Sound(som_parede)
@@ -31,7 +31,7 @@ class Personagem:
                 som = pygame.mixer.Sound(som_passos)
                 som.play()
                 self.altura -= 1
-        elif (event == pygame.K_a):
+        elif (event == pygame.K_LEFT):
             if ((self.largura-1) < 1):
                 som_parede = 'sons/efeitos/parede.wav'
                 som = pygame.mixer.Sound(som_parede)
@@ -41,7 +41,7 @@ class Personagem:
                 som = pygame.mixer.Sound(som_passos)
                 som.play()
                 self.largura -= 1
-        elif (event == pygame.K_d):
+        elif (event == pygame.K_RIGHT):
             if ((self.largura+1) > mapa.largura):
                 som_parede = 'sons/efeitos/parede.wav'
                 som = pygame.mixer.Sound(som_parede)
@@ -157,7 +157,7 @@ class Personagem:
         from accessible_output2.outputs.auto import Auto
         o = Auto()
         if ((self.largura == mapa.porta_de_saida.largura) and (self.altura == mapa.porta_de_saida.altura)):
-            frase = 'Edd: A porta de saída dessa fase está aqui. Você pode inserir uma bateria energizada nela se tiver. Para isso encontre suas baterias com seta para esquerda ou seta para direita e quando encontrar aperte seta para cima.'
+            frase = 'Edd: A porta de saída dessa fase está aqui. Você pode inserir uma bateria energizada nela se tiver. Para isso encontre suas baterias com a tecla CTRL e quando encontrar aperte barra de espaço.'
             o.speak(frase, interrupt=True)
 
     def insere_bateria_na_porta(self, pygame, mapa):

@@ -17,12 +17,11 @@ tela.fill((255, 255, 255))
 # menu de teclas
 menu_de_teclas = Menu(pygame)
 menu_de_teclas.adiciona_item('menu de ajuda com as teclas')
-menu_de_teclas.adiciona_item('seta para cima ou seta para baixo: navega por menus / repete diálogos')
+menu_de_teclas.adiciona_item('setas direcionais: navega por menus / repete diálogos / movimenta o personagem durante o jogo')
 menu_de_teclas.adiciona_item('enter: seleciona opção do menu / avança em diálogos')
 menu_de_teclas.adiciona_item('esc: pula diálogo da fase atual')
-menu_de_teclas.adiciona_item('w, a, s, d: movimenta o personagem')
-menu_de_teclas.adiciona_item('seta para esquerda ou seta para direita: navega pelos seus itens')
-menu_de_teclas.adiciona_item('barra de espaço: interage com item selecionado com as setas')
+menu_de_teclas.adiciona_item('ctrl: navega pelos seus itens')
+menu_de_teclas.adiciona_item('barra de espaço: interage com item selecionado com a tecla ctrl')
 menu_de_teclas.adiciona_item('r: rastreia robombas próximos')
 menu_de_teclas.adiciona_item('tab: altera alvo que está na mira da arma, quando possível (precisa habilitar a arma)')
 menu_de_teclas.adiciona_item('1: informações do personagem, seu nome e seu hp atual')
@@ -103,7 +102,7 @@ while (menu_principal_ativo == True):
                 sys.exit()
 
             if (event.type == KEYDOWN):
-                if ((event.key == pygame.K_w) or (event.key == pygame.K_a) or (event.key == pygame.K_s) or (event.key == pygame.K_d)):
+                if ((event.key == pygame.K_UP) or (event.key == pygame.K_LEFT) or (event.key == pygame.K_DOWN) or (event.key == pygame.K_RIGHT)):
                     edd.navega_no_mapa(pygame, event.key, fase_atual.mapa_da_fase)
                     if (fase_atual.mapa_da_fase.verifica_bateria(pygame, edd)):
                         edd.pega_bateria()
@@ -151,7 +150,7 @@ while (menu_principal_ativo == True):
                             pygame.quit()
                             sys.exit()
 
-                elif ((event.key == pygame.K_LEFT) or (event.key == pygame.K_RIGHT)):
+                elif (event.key == pygame.K_LCTRL):
                     if (fase >= 3):
                         edd.altera_item()
                     edd.mostra_informacoes_do_item_atual()
