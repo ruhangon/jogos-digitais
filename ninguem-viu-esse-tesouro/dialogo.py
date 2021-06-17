@@ -5,6 +5,7 @@ class Dialogo:
         self.finais = deque()
 
     def mostra_dialogos_iniciais(self, pygame):
+        import sys
         from accessible_output2.outputs.auto import Auto
         o = Auto()
         frase_atual = self.iniciais.popleft()
@@ -27,6 +28,7 @@ class Dialogo:
                         o.speak(frase_atual, interrupt=True)
 
     def mostra_dialogos_finais(self, pygame):
+        import sys
         from accessible_output2.outputs.auto import Auto
         o = Auto()
         frase_atual = self.finais.popleft()

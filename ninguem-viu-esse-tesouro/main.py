@@ -6,6 +6,9 @@ import os
 import pygame
 import sys
 
+dir_principal = os.path.dirname(__file__)
+dir_sons = os.path.join(dir_principal, 'data')
+
 pygame.init()
 
 tela = pygame.display.set_mode([500, 500])
@@ -37,8 +40,7 @@ menu_de_creditos.adiciona_item('Desenvolvido por Ruhan Gonçalves')
 menu_de_creditos.adiciona_item('voltar para o menu principal')
 
 # menu principal
-dir_trilha_menu = 'sons/trilhas/menu_principal.mp3'
-menu_principal = Menu(pygame, dir_trilha_menu)
+menu_principal = Menu(pygame, os.path.join(dir_sons, 'menu_principal.mp3'))
 menu_principal.adiciona_item('novo jogo')
 menu_principal.adiciona_item('ajuda com as teclas')
 menu_principal.adiciona_item('créditos')
@@ -53,35 +55,30 @@ menu_principal_ativo = True
 while (menu_principal_ativo == True):
     acao_menu = menu_principal.faz_acao(pygame)
     if (acao_menu == 'novo jogo'):
-        som_enter = 'sons/efeitos/enter.wav'
-        som = pygame.mixer.Sound(som_enter)
+        som = pygame.mixer.Sound(os.path.join(dir_sons, 'enter.wav'))
         som.play()
         pygame.mixer.music.stop()
         menu_principal_ativo = False
     elif (acao_menu == 'ajuda com as teclas'):
-        som_enter = 'sons/efeitos/enter.wav'
-        som = pygame.mixer.Sound(som_enter)
+        som = pygame.mixer.Sound(os.path.join(dir_sons, 'enter.wav'))
         som.play()
         acao_menu = ''
         while (True):
             acao_menu = menu_de_teclas.faz_acao(pygame)
             if (acao_menu == 'voltar para o menu principal'):
-                som_esc = 'sons/efeitos/esc.wav'
-                som = pygame.mixer.Sound(som_esc)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'esc.wav'))
                 som.play()
                 break
         menu_principal.ponteiro = 0
         menu_de_teclas.ponteiro = 0
     elif (acao_menu == 'créditos'):
-        som_enter = 'sons/efeitos/enter.wav'
-        som = pygame.mixer.Sound(som_enter)
+        som = pygame.mixer.Sound(os.path.join(dir_sons, 'enter.wav'))
         som.play()
         acao_menu = ''
         while (True):
             acao_menu = menu_de_creditos.faz_acao(pygame)
             if (acao_menu == 'voltar para o menu principal'):
-                som_esc = 'sons/efeitos/esc.wav'
-                som = pygame.mixer.Sound(som_esc)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'esc.wav'))
                 som.play()
                 break
         menu_principal.ponteiro = 0
@@ -103,27 +100,25 @@ while (menu_principal_ativo == True):
 
             if (event.type == KEYDOWN):
                 if ((event.key == pygame.K_UP) or (event.key == pygame.K_LEFT) or (event.key == pygame.K_DOWN) or (event.key == pygame.K_RIGHT)):
-                    edd.navega_no_mapa(pygame, event.key, fase_atual.mapa_da_fase)
-                    if (fase_atual.mapa_da_fase.verifica_bateria(pygame, edd)):
+                    edd.navega_no_mapa(pygame, event.key, fase_atual.mapa_da_fase, os, dir_sons)
+                    if (fase_atual.mapa_da_fase.verifica_bateria(pygame, edd, os, dir_sons)):
                         edd.pega_bateria()
                     if (fase >=3):
                         edd.procura_robombas(fase_atual.mapa_da_fase.robombas)
                         if (fase_atual.mapa_da_fase.verifica_municao(pygame, edd)):
-                            edd.pega_municao_e_recarrega(pygame)
+                            edd.pega_municao_e_recarrega(pygame, os, dir_sons)
                     edd.localiza_porta(fase_atual.mapa_da_fase)
-                    fase_atual.mapa_da_fase.verifica_armadilha_robomba(pygame, edd)
-                    edd.radar_robombas(pygame, fase_atual.mapa_da_fase.robombas)
+                    fase_atual.mapa_da_fase.verifica_armadilha_robomba(pygame, edd, os, dir_sons)
+                    edd.radar_robombas(pygame, fase_atual.mapa_da_fase.robombas, os, dir_sons)
                     if (edd.sobrevive() == False):
-                        dir_trilha_menu = 'sons/trilhas/menu_derrota.mp3'
-                        menu_derrota = Menu(pygame, dir_trilha_menu)
+                        menu_derrota = Menu(pygame, os.path.join(dir_sons, 'menu_derrota.mp3'))
                         menu_derrota.adiciona_item('reiniciar fase')
                         menu_derrota.adiciona_item('sair do jogo')
                         pygame.mixer.music.set_volume(0.1)
                         pygame.mixer.music.play(-1)
                         acao_menu = menu_derrota.faz_acao(pygame)
                         if (acao_menu == 'reiniciar fase'):
-                            som_enter = 'sons/efeitos/enter.wav'
-                            som = pygame.mixer.Sound(som_enter)
+                            som = pygame.mixer.Sound(os.path.join(dir_sons, 'enter.wav'))
                             som.play()
                             pygame.mixer.music.stop()
                             if (fase == 1):
@@ -157,17 +152,16 @@ while (menu_principal_ativo == True):
 
                 elif (event.key == pygame.K_SPACE):
                     if (edd.item_atual == 0):
-                        edd.insere_bateria_na_porta(pygame, fase_atual.mapa_da_fase)
+                        edd.insere_bateria_na_porta(pygame, fase_atual.mapa_da_fase, os, dir_sons)
                     elif (edd.item_atual == 1):
-                        edd.aperta_gatilho(pygame, fase_atual.mapa_da_fase)
+                        edd.aperta_gatilho(pygame, fase_atual.mapa_da_fase, os, dir_sons)
 
                 elif (event.key == pygame.K_RETURN):
-                    edd.abre_porta(pygame, fase_atual.mapa_da_fase)
+                    edd.abre_porta(pygame, fase_atual.mapa_da_fase, os, dir_sons)
                     if (fase_atual.mapa_da_fase.porta_de_saida.trancada == False):
                         if (fase <= 4):
                             fase_atual.dialogos.mostra_dialogos_finais(pygame)
-                            dir_trilha_menu = 'sons/trilhas/menu_vitoria.mp3'
-                            menu_vitoria = Menu(pygame, dir_trilha_menu)
+                            menu_vitoria = Menu(pygame, os.path.join(dir_sons, 'menu_vitoria.mp3'))
                             menu_vitoria.adiciona_item('ir para a próxima fase')
                             menu_vitoria.adiciona_item('sair do jogo')
                             pygame.mixer.music.set_volume(0.1)
@@ -199,7 +193,7 @@ while (menu_principal_ativo == True):
                                 pygame.quit()
                                 sys.exit()
                         else:
-                            pygame.mixer.music.load('sons/trilhas/final.mp3')
+                            pygame.mixer.music.load(os.path.join(dir_sons, 'final.mp3'))
                             pygame.mixer.music.set_volume(0.1)
                             pygame.mixer.music.play(-1)
                             fase_atual.dialogos.mostra_dialogos_finais(pygame)

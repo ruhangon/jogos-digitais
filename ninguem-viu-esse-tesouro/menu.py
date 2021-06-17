@@ -9,6 +9,7 @@ class Menu:
         self.lista_opcoes.append(str(item))
 
     def faz_acao(self, pygame):
+        import sys
         from accessible_output2.outputs.auto import Auto
         o = Auto()
         while (True):

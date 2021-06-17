@@ -9,16 +9,14 @@ class Arma:
     def insere(self):
         self.municao.append(True)
 
-    def atira(self, pygame):
+    def atira(self, pygame, os, dir_sons):
         if (len(self.municao) > 0):
             atirou = self.municao.popleft()
-            som_tiro = 'sons/efeitos/tiro.wav'
-            som = pygame.mixer.Sound(som_tiro)
+            som = pygame.mixer.Sound(os.path.join(dir_sons, 'tiro.wav'))
             som.play()
             return atirou
         else:
-            som_sem_municao = 'sons/efeitos/sem_municao.wav'
-            som = pygame.mixer.Sound(som_sem_municao)
+            som = pygame.mixer.Sound(os.path.join(dir_sons, 'sem_municao.wav'))
             som.play()
             return False
 

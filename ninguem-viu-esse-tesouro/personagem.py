@@ -10,45 +10,37 @@ class Personagem:
         self.arma = Arma()
         self.item_atual = 0
 
-    def navega_no_mapa(self, pygame, event, mapa):
+    def navega_no_mapa(self, pygame, event, mapa, os, dir_sons):
         if (event == pygame.K_UP):
             if ((self.altura+1) > mapa.altura):
-                som_parede = 'sons/efeitos/parede.wav'
-                som = pygame.mixer.Sound(som_parede)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'parede.wav'))
                 som.play()
             else:
-                som_passos = 'sons/efeitos/passos.wav'
-                som = pygame.mixer.Sound(som_passos)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'passos.wav'))
                 som.play()
                 self.altura += 1
         elif (event == pygame.K_DOWN):
             if ((self.altura-1) < 1):
-                som_parede = 'sons/efeitos/parede.wav'
-                som = pygame.mixer.Sound(som_parede)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'parede.wav'))
                 som.play()
             else:
-                som_passos = 'sons/efeitos/passos.wav'
-                som = pygame.mixer.Sound(som_passos)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'passos.wav'))
                 som.play()
                 self.altura -= 1
         elif (event == pygame.K_LEFT):
             if ((self.largura-1) < 1):
-                som_parede = 'sons/efeitos/parede.wav'
-                som = pygame.mixer.Sound(som_parede)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'parede.wav'))
                 som.play()
             else:
-                som_passos = 'sons/efeitos/passos.wav'
-                som = pygame.mixer.Sound(som_passos)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'passos.wav'))
                 som.play()
                 self.largura -= 1
         elif (event == pygame.K_RIGHT):
             if ((self.largura+1) > mapa.largura):
-                som_parede = 'sons/efeitos/parede.wav'
-                som = pygame.mixer.Sound(som_parede)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'parede.wav'))
                 som.play()
             else:
-                som_passos = 'sons/efeitos/passos.wav'
-                som = pygame.mixer.Sound(som_passos)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'passos.wav'))
                 som.play()
                 self.largura += 1
 
@@ -85,7 +77,7 @@ class Personagem:
         self.largura = 3
         self.altura = 1
 
-    def radar_robombas(self, pygame, pos_robombas):
+    def radar_robombas(self, pygame, pos_robombas, os, dir_sons):
         from accessible_output2.outputs.auto import Auto
         o = Auto()
         alerta_robomba = False
@@ -98,8 +90,7 @@ class Personagem:
         elif ([(self.largura-1), self.altura] in pos_robombas):
             alerta_robomba = True
         if (alerta_robomba == True):
-            som_radar_robomba = 'sons/efeitos/radar_robomba.wav'
-            som = pygame.mixer.Sound(som_radar_robomba)
+            som = pygame.mixer.Sound(os.path.join(dir_sons, 'radar_robomba.wav'))
             som.play()
             frase = 'Edd: Há pelo menos um robomba localizado.'
             o.speak(frase, interrupt=False)
@@ -143,12 +134,11 @@ class Personagem:
         frase = 'Edd: Uma bateria foi adicionada ao topo da pilha do guarda baterias e será energizada.'
         o.speak(frase, interrupt=False)
 
-    def pega_municao_e_recarrega(self, pygame):
+    def pega_municao_e_recarrega(self, pygame, os, dir_sons):
         from accessible_output2.outputs.auto import Auto
         o = Auto()
         self.arma.insere()
-        som_achou_municao_e_recarregou = 'sons/efeitos/achou_municao_e_recarregou.wav'
-        som = pygame.mixer.Sound(som_achou_municao_e_recarregou)
+        som = pygame.mixer.Sound(os.path.join(dir_sons, 'achou_municao_e_recarregou.wav'))
         som.play()
         frase = 'Edd: Peguei uma munição e coloquei no fim da fila ao recarregar a arma.'
         o.speak(frase, interrupt=False)
@@ -160,17 +150,16 @@ class Personagem:
             frase = 'Edd: A porta de saída dessa fase está aqui. Você pode inserir uma bateria energizada nela se tiver. Para isso encontre suas baterias com a tecla CTRL e quando encontrar aperte barra de espaço.'
             o.speak(frase, interrupt=True)
 
-    def insere_bateria_na_porta(self, pygame, mapa):
+    def insere_bateria_na_porta(self, pygame, mapa, os, dir_sons):
         from accessible_output2.outputs.auto import Auto
         o = Auto()
         if ((self.largura == mapa.porta_de_saida.largura) and (self.altura == mapa.porta_de_saida.altura)):
             if (self.guarda_baterias.retira() == True):
                 frase = 'Edd: A bateria energizada do topo da pilha do guarda baterias foi retirada.'
                 o.speak(frase, interrupt=False)
-                mapa.porta_de_saida.insere_bateria_energizada(pygame, True)
+                mapa.porta_de_saida.insere_bateria_energizada(pygame, True, os, dir_sons)
                 if (mapa.porta_de_saida.baterias_energizadas == 3):
-                    som_porta_energizada = 'sons/efeitos/porta_energizada.wav'
-                    som = pygame.mixer.Sound(som_porta_energizada)
+                    som = pygame.mixer.Sound(os.path.join(dir_sons, 'porta_energizada.wav'))
                     som.play()
                     frase = 'Edd: A porta está energizada. Pressione enter para abrir ela e assim poder finalizar a fase.'
                     o.speak(frase, interrupt=False)
@@ -204,51 +193,45 @@ class Personagem:
                 frase = 'Edd: Mira focada no robomba a esquerda.'
                 o.speak(frase, interrupt = True)
 
-    def aperta_gatilho(self, pygame, mapa):
+    def aperta_gatilho(self, pygame, mapa, os, dir_sons):
         if (self.arma.mira_atual != -1):
             if (self.arma.mira_atual == 0):
-                tem_municao = self.arma.atira(pygame)
+                tem_municao = self.arma.atira(pygame, os, dir_sons)
                 if (tem_municao == True):
                     mapa.robombas.remove([self.largura, (self.altura+1)])
-                    som_explosao = 'sons/efeitos/explosao.wav'
-                    som = pygame.mixer.Sound(som_explosao)
+                    som = pygame.mixer.Sound(os.path.join(dir_sons, 'explosao.wav'))
                     som.play()
                     self.arma.mira_atual = -1
             elif (self.arma.mira_atual == 1):
-                tem_municao = self.arma.atira(pygame)
+                tem_municao = self.arma.atira(pygame, os, dir_sons)
                 if (tem_municao == True):
                     mapa.robombas.remove([(self.largura+1), self.altura])
-                    som_explosao = 'sons/efeitos/explosao.wav'
-                    som = pygame.mixer.Sound(som_explosao)
+                    som = pygame.mixer.Sound(os.path.join(dir_sons, 'explosao.wav'))
                     som.play()
                     self.arma.mira_atual = -1
             elif (self.arma.mira_atual == 2):
-                tem_municao = self.arma.atira(pygame)
+                tem_municao = self.arma.atira(pygame, os, dir_sons)
                 if (tem_municao == True):
                     mapa.robombas.remove([self.largura, (self.altura-1)])
-                    som_explosao = 'sons/efeitos/explosao.wav'
-                    som = pygame.mixer.Sound(som_explosao)
+                    som = pygame.mixer.Sound(os.path.join(dir_sons, 'explosao.wav'))
                     som.play()
                     self.arma.mira_atual = -1
             elif (self.arma.mira_atual == 3):
-                tem_municao = self.arma.atira(pygame)
+                tem_municao = self.arma.atira(pygame, os, dir_sons)
                 if (tem_municao == True):
                     mapa.robombas.remove([(self.largura-1), self.altura])
-                    som_explosao = 'sons/efeitos/explosao.wav'
-                    som = pygame.mixer.Sound(som_explosao)
+                    som = pygame.mixer.Sound(os.path.join(dir_sons, 'explosao.wav'))
                     som.play()
                     self.arma.mira_atual = -1
 
-    def abre_porta(self, pygame, mapa):
+    def abre_porta(self, pygame, mapa, os, dir_sons):
         if ((self.largura == mapa.porta_de_saida.largura) and (self.altura == mapa.porta_de_saida.altura)):
             if (mapa.porta_de_saida.baterias_energizadas == 3):
                 mapa.porta_de_saida.trancada = False
-                som_completou_fase = 'sons/efeitos/completou_fase.wav'
-                som = pygame.mixer.Sound(som_completou_fase)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'completou_fase.wav'))
                 som.play()
             else:
-                som_porta_trancada = 'sons/efeitos/porta_trancada.wav'
-                som = pygame.mixer.Sound(som_porta_trancada)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'porta_trancada.wav'))
                 som.play()
 
     def altera_item(self):

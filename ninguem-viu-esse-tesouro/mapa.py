@@ -21,14 +21,13 @@ class Mapa:
         self.porta_de_saida.largura = pos_porta[0]
         self.porta_de_saida.altura = pos_porta[1]
 
-    def verifica_armadilha_robomba(self, pygame, personagem):
+    def verifica_armadilha_robomba(self, pygame, personagem, os, dir_sons):
         from accessible_output2.outputs.auto import Auto
         o = Auto()
         robomba_atual = 0
         for pos_robombas in self.robombas:
             if ((personagem.largura == pos_robombas[0]) and (personagem.altura == pos_robombas[1])):
-                som_explosao = 'sons/efeitos/explosao.wav'
-                som = pygame.mixer.Sound(som_explosao)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'explosao.wav'))
                 som.play()
                 personagem.hp -= 5
                 frase = 'Edd: Acho que pisei em um robomba.'
@@ -37,12 +36,11 @@ class Mapa:
                 break
             robomba_atual += 1
 
-    def verifica_bateria(self, pygame, personagem):
+    def verifica_bateria(self, pygame, personagem, os, dir_sons):
         bateria_atual = 0
         for pos_baterias in self.baterias:
             if ((personagem.largura == pos_baterias[0]) and (personagem.altura == pos_baterias[1])):
-                som_bateria = 'sons/efeitos/achou_bateria.wav'
-                som = pygame.mixer.Sound(som_bateria)
+                som = pygame.mixer.Sound(os.path.join(dir_sons, 'achou_bateria.wav'))
                 som.play()
                 self.baterias.pop(bateria_atual)
                 return True
